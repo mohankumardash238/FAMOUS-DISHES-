@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Famous Indian Dishes State-Wise</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #121212;
+            color: #333;
+        }
+        header {
+            text-align: center;
+            padding: 10px 0;
+            background-color: #007bff;
+            color: white;
+            margin-bottom: 20px;
+            border-radius: 5px;
+        }
+        h1 {
+            margin: 0;
+        }
+        .container {
+            max-width: 900px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        /* --- NEW STYLES FOR INTERACTION --- */
+        .controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            gap: 10px;
+        }
+        .controls input[type="text"] {
+            padding: 10px;
+            width: 70%;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .controls button {
+            padding: 10px 15px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .controls button:hover {
+            background-color: #218838;
+        }
+        /* -------------------------------- */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            overflow: hidden;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+            transition: background 0.3s;
+        }
+        th {
+            background-color: #3e8e41;
+            color: #fff;
+            cursor: pointer; /* Indicate sortable headers */
+        }
+        th:hover {
+           background-color: #2c5f2d;
+        }
+        tr:nth-child(even) {
+            background-color: #eafaf1;
+        }
+        tr:nth-child(odd) {
+            background-color: #f6e7ff;
+        }
+        tr:hover {
+            background-color: #ffe4b5 !important;
+        }
+        .price-note {
+            margin-top: 30px;
+            padding: 15px;
+            background-color: #fff3cd;
+            border-left: 5px solid #ffc107;
+            color: #856404;
+            border-radius: 4px;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Famous Dishes of India 🇮🇳</h1>
+        <p>State-Wise Delicacies with Estimated Price Ranges</p>
+    </header>
+
+    <div class="container">
+        <div class="controls">
+            <input type="text" id="searchInput" onkeyup="filterDishes()" placeholder="Search by State or Dish name...">
+            <button onclick="sortTable(3)">Sort by Price (Low/High)</button>
+        </div>
+        
+        <table id="dishTable">
+            <thead>
+                <tr>
+                    <th onclick="sortTable(0)">State/UT</th>
+                    <th onclick="sortTable(1)">Famous Dish</th>
+                    <th>Description</th>
+                    <th onclick="sortTable(3)">Approx. Price Range (₹)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Andhra Pradesh</strong></td>
+                        <td><a href="https://www.youtube.com/results?search_query=Gongura+Pachadi+recipe" target="_blank">Gongura Pachadi</a></td>
+                    <td>Spicy pickle made from sour Roselle leaves.</td>
+                    <td>₹50 - ₹150</td>
+                </tr>
+                <tr>
+                    <td><strong>Assam</strong></td>
+                        <td><a href="https://www.youtube.com/results?search_query=Masor+Tenga+recipe" target="_blank">Masor Tenga</a></td>
+                    <td>A tangy fish curry, often made with tomatoes or lemon.</td>
+                    <td>₹180 - ₹350</td>
+                </tr>
+                <tr>
+                    <td><strong>Bihar</strong></td>
+                        <td><a href="https://www.youtube.com/results?search_query=Litti+Chokha+recipe" target="_blank">Litti Chokha</a></td>
+                    <td>Roasted wheat balls stuffed with sattu (gram flour) served with a mashed vegetable relish.</td>
+                    <td>₹50 - ₹120</td>
+                </tr>
+                <tr>
+                    <td><strong>Goa</strong></td>
+                        <td><a href="https://www.youtube.com/results?search_query=Goan+Fish+Curry+recipe" target="_blank">Goan Fish Curry (Xacuti/Ambot Tik)</a></td>
+                    <td>Coconut-based, spicy, and tangy fish or prawn curry.</td>
+                    <td>₹300 - ₹550</td>
+                </tr>
+                <tr>
+                    <td><strong>Gujarat</strong></td>
+                        <td><a href="https://www.youtube.com/results?search_query=Khaman+Dhokla+recipe" target="_blank">Khaman Dhokla</a></td>
+                    <td>A soft, spongy, steamed savoury cake made from fermented gram flour.</td>
+                    <td>₹60 - ₹120</td>
+                </tr>
+                <tr>
+                    <td><strong>Jammu & Kashmir</strong></td>
+                        <td><a href="https://www.youtube.com/results?search_query=Rogan+Josh+recipe" target="_blank">Rogan Josh</a></td>
+                    <td>Aromatic lamb curry cooked in Kashmiri chilies and yogurt.</td>
+                    <td>₹350 - ₹600</td>
+                </tr>
+                <tr>
+                    <td><strong>Karnataka</strong></td>
+                        <td><a href="https://www.youtube.com/results?search_query=Bisi+Bele+Bhaat+recipe" target="_blank">Bisi Bele Bhaat</a></td>
+                    <td>A spicy, wholesome rice dish cooked with lentils, vegetables, and a special spice mix.</td>
+                    <td>₹100 - ₹200</td>
+                </tr>
+                <tr>
+                    <td><strong>Kerala</strong></td>
+                        <td><a href="https://www.youtube.com/results?search_query=Appam+with+Stew+recipe" target="_blank">Appam with Stew</a></td>
+                    <td>Lacy, bowl-shaped pancakes made from fermented rice batter, served with a mild, coconut-milk-based stew.</td>
+                    <td>₹150 - ₹300</td>
+                </tr>
+                <tr>
+                    <td><strong>Maharashtra</strong></td>
+                        <td><a href="https://www.youtube.com/results?search_query=Vada+Pav+Misal+Pav+recipe" target="_blank">Vada Pav / Misal Pav</a></td>
+                    <td>Vada Pav: Spiced potato fritter in a bun. Misal Pav: Spicy sprouted lentil curry.</td>
+                    <td>₹20 - ₹180</td>
+                </tr>
+                <tr>
+                    <td><strong>Manipur</strong></td>
+                        <td><a href="https://www.youtube.com/results?search_query=Eromba+recipe" target="_blank">Eromba</a></td>
+                    <td>A mash of boiled vegetables with fermented fish and chili.</td>
+                    <td>₹120 - ₹250</td>
+                </tr>
+                <tr>
+                    <td><strong>Odisha</strong></td>
+                        <td><a href="https://www.youtube.com/results?search_query=Chhena+Poda+recipe" target="_blank">Chhena Poda</a></td>
+                    <td>A dessert made from baked ricotta cheese, sugar, and semolina.</td>
+                    <td>₹25 - ₹50</td>
+                </tr>
+                <tr>
+                    <td><strong>Punjab</strong></td>
+                        <td><a href="https://www.youtube.com/results?search_query=Makki+di+Roti+Sarson+da+Saag+recipe" target="_blank">Makki di Roti & Sarson da Saag</a></td>
+                    <td>Corn flour flatbread served with a mustard greens curry.</td>
+                    <td>₹200 - ₹400</td>
+                </tr>
+                <tr>
+                    <td><strong>Rajasthan</strong></td>
+                        <td><a href="https://www.youtube.com/results?search_query=Dal+Baati+Churma+recipe" target="_blank">Dal Baati Churma</a></td>
+                    <td>Baked wheat balls (Baati) served with a lentil curry (Dal) and a sweet crumbled mixture (Churma).</td>
+                    <td>₹250 - ₹450</td>
+                </tr>
+                <tr>
+                    <td><strong>Tamil Nadu</strong></td>
+                        <td><a href="https://www.youtube.com/results?search_query=Pongal+recipe" target="_blank">Pongal</a></td>
+                    <td>A savory porridge made of rice and lentils, seasoned with cumin, pepper, and ghee.</td>
+                    <td>₹60 - ₹120</td>
+                </tr>
+                <tr>
+                    <td><strong>Telangana</strong></td>
+                        <td><a href="https://www.youtube.com/results?search_query=Hyderabadi+Biryani+recipe" target="_blank">Hyderabadi Biryani</a></td>
+                    <td>A fragrant rice dish layered with marinated meat (usually chicken or mutton) and spices.</td>
+                    <td>₹200 - ₹450</td>
+                </tr>
+                <tr>
+                    <td><strong>Uttar Pradesh</strong></td>
+                        <td><a href="https://www.youtube.com/results?search_query=Tunday+Kebab+recipe" target="_blank">Tunday Kebab</a></td>
+                    <td>Melt-in-your-mouth minced meat kebabs, often served with paratha.</td>
+                    <td>₹150 - ₹350</td>
+                </tr>
+                <tr>
+                    <td><strong>West Bengal</strong></td>
+                        <td><a href="https://www.youtube.com/results?search_query=Kosha+Mangsho+recipe" target="_blank">Kosha Mangsho</a></td>
+                    <td>Slow-cooked, spicy mutton (goat meat) curry with a thick, rich gravy.</td>
+                    <td>₹300 - ₹500</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="price-note">
+            <strong>Disclaimer on Prices:</strong>
+            <p>The prices listed are <strong>Approximate Average Ranges</strong> in Indian Rupees (₹) and are highly subject to change. They represent an estimate for a single serving in a standard, mid-range local restaurant or eatery. Prices vary by city, venue, and ingredients.</p>
+        </div>
+    </div>
+
+    <script>
+        // Global variable to track sort direction for the price column
+        let sortDirection = {}; 
+        
+        /**
+         * 1. Search/Filter Function
+         * Filters the table rows based on the text entered in the search box.
+         */
+        function filterDishes() {
+            const input = document.getElementById('searchInput');
+            const filter = input.value.toUpperCase();
+            const table = document.getElementById('dishTable');
+            const tr = table.getElementsByTagName('tr');
+
+            for (let i = 1; i < tr.length; i++) { // Start at 1 to skip the header row
+                let found = false;
+                // Loop through all columns (State, Dish, Description)
+                for (let j = 0; j < 3; j++) { 
+                    const td = tr[i].getElementsByTagName('td')[j];
+                    if (td) {
+                        const txtValue = td.textContent || td.innerText;
+                        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                            found = true;
+                            break;
+                        }
+                    }
+                }
+                
+                tr[i].style.display = found ? '' : 'none';
+            }
+        }
+
+        /**
+         * 2. Sorting Function
+         * Sorts the table by a specific column (n) in ascending or descending order.
+         * Special handling is included for the Price column (n=3) to sort numerically.
+         */
+        function sortTable(n) {
+            let table, rows, switching, i, x, y;
+            table = document.getElementById("dishTable");
+            switching = true;
+            
+            // Set the sort direction for this column (default to ascending)
+            if (sortDirection[n] === undefined) {
+                sortDirection[n] = "asc";
+            } else {
+                sortDirection[n] = (sortDirection[n] === "asc") ? "desc" : "asc";
+            }
+            
+            while (switching) {
+                switching = false;
+                rows = table.rows;
+                
+                // Loop through all table rows (except the first, which contains table headers)
+                for (i = 1; i < (rows.length - 1); i++) {
+                    let shouldSwitch = false;
+                    
+                    x = rows[i].getElementsByTagName("TD")[n];
+                    y = rows[i + 1].getElementsByTagName("TD")[n];
+                    
+                    let xValue, yValue;
+
+                    if (n === 3) { // Special logic for the Price column (index 3)
+                        // Extract the average or lower range price by removing "₹", "-", and taking the first number
+                        xValue = parseFloat(x.innerHTML.replace(/[^\d.]/g, '').split(' ')[0]);
+                        yValue = parseFloat(y.innerHTML.replace(/[^\d.]/g, '').split(' ')[0]);
+
+                        if (sortDirection[n] === "asc") {
+                            if (xValue > yValue) {
+                                shouldSwitch = true;
+                                break;
+                            }
+                        } else if (sortDirection[n] === "desc") {
+                            if (xValue < yValue) {
+                                shouldSwitch = true;
+                                break;
+                            }
+                        }
+                    } else { // Standard text sorting for other columns (State, Dish)
+                        // Use localCompare for proper alphabetical sorting
+                        if (sortDirection[n] === "asc") {
+                            if (x.innerHTML.toLowerCase().localeCompare(y.innerHTML.toLowerCase()) > 0) {
+                                shouldSwitch = true;
+                                break;
+                            }
+                        } else if (sortDirection[n] === "desc") {
+                            if (x.innerHTML.toLowerCase().localeCompare(y.innerHTML.toLowerCase()) < 0) {
+                                shouldSwitch = true;
+                                break;
+                            }
+                        }
+                    }
+                }
+                
+                if (shouldSwitch) {
+                    rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+                    switching = true;
+                }
+            }
+        }
+    </script>
+    </body>
+</html>
